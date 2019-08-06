@@ -21,3 +21,18 @@ services:
       - "mongodb"
     environment:
       ME_CONFIG_MONGODB_SERVER: mongodb
+  #
+  # memcached
+  #
+  memcached:
+    image: memcached:alpine
+    restart: always
+    ports:
+      - "${PORT_MEMCACHED}:11211"
+    networks:
+      main:
+        aliases:
+          - memcached
+
+networks:
+  main:
