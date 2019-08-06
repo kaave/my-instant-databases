@@ -1,7 +1,7 @@
 # My instant databases
 
 - [x] mongodb
-- [ ] memcached
-- [ ] redis
+- [x] memcached
+- [x] redis
 - [ ] MySQL
-- [ ] PostgreSQL
+- [x] PostgreSQL
