@@ -33,6 +33,30 @@ services:
       main:
         aliases:
           - memcached
+  #
+  # postgres
+  #
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "${PORT_POSTGRES}:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+  pgweb:
+    image: sosedoff/pgweb
+    ports:
+      - "${PORT_PGWEB}:8081"
+    links:
+      - postgres # my database container is called postgres, not db
+    # environment:
+    #   # format: postgres://user:password@host:port/db?sslmode=mode
+    #   # TODO: なんだかしらんがdockerからだとつながらないため、以下のURLをブラウザから叩く
+    #   - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+    depends_on:
+      - postgres
 
 networks:
   main:

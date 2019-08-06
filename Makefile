@@ -7,6 +7,7 @@ init:
 	fi
 	make clean
 	mkdir -p mongo/{configdb,db}
+	mkdir -p postgres/data
 	docker-compose build
 	make run
 
@@ -16,3 +17,4 @@ run:
 clean:
 	docker-compose down
 	rm -rf mongo
+	rm -rf postgres
