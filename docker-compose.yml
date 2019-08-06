@@ -34,6 +34,27 @@ services:
         aliases:
           - memcached
   #
+  # redis
+  #
+  redis:
+    image: redis:alpine
+    ports:
+      - "${PORT_REDIS}:8081"
+    volumes:
+      - ./redis/data:/data
+  phpredisadmin:
+    image: erikdubbelboer/phpredisadmin
+    ports:
+      - "${PORT_PHPREDISADMIN}:80"
+    links:
+      - redis
+    environment:
+      REDIS_1_HOST: redis
+    #   REDIS_1_NAME: redis
+    #   REDIS_1_PORT: ${PORT_REDIS}
+    depends_on:
+      - redis
+  #
   # postgres
   #
   postgres:

@@ -76,4 +76,5 @@ $RECYCLE.BIN/
 ### Manual ###
 /mongo
 /postgres
+/redis
 /.env
