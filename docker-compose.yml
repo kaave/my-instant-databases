@@ -6,7 +6,6 @@ services:
   #
   mongodb:
     image: mvertes/alpine-mongo:3.6.5-0
-    restart: always
     ports:
       - "${PORT_MONGODB}:27017"
     volumes:
@@ -14,11 +13,10 @@ services:
       - ./mongo/configdb:/data/configdb
   mongo-express:
     image: mongo-express
-    restart: always
     ports:
       - "${PORT_MONGODB_EXPRESS}:8081"
     depends_on:
-      - "mongodb"
+      - mongodb
     environment:
       ME_CONFIG_MONGODB_SERVER: mongodb
   #
@@ -26,13 +24,8 @@ services:
   #
   memcached:
     image: memcached:alpine
-    restart: always
     ports:
       - "${PORT_MEMCACHED}:11211"
-    networks:
-      main:
-        aliases:
-          - memcached
   #
   # redis
   #
@@ -99,5 +92,3 @@ services:
       - mysql
     depends_on:
       - mysql
-networks:
-  main:
