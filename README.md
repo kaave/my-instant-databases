@@ -3,5 +3,5 @@
 - [x] mongodb
 - [x] memcached
 - [x] redis
-- [ ] MySQL
+- [x] MySQL
 - [x] PostgreSQL

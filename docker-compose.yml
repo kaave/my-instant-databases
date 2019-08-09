@@ -78,6 +78,26 @@ services:
     #   - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
     depends_on:
       - postgres
-
+  #
+  # MySQL(mariadb)
+  #
+  mysql:
+    image: mariadb:latest
+    ports:
+      - "${PORT_MYSQL}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: pw
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "${PORT_PHPMYADMIN}:80"
+    environment:
+      PMA_HOSTS: mysql
+    links:
+      - mysql
+    depends_on:
+      - mysql
 networks:
   main:
